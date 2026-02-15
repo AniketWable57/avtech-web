@@ -131,7 +131,7 @@ const Contact = () => {
     }
 
     // Phone validation
-    const phoneRegex = /^[0-9\-\+]{9,15}$/;
+  const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     if (!phoneRegex.test(formData.phone.replace(/\D/g, ''))) {
       setFormStatus({
         submitted: true,
