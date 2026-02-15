@@ -75,19 +75,19 @@ const Contact = () => {
     {
       icon: 'fas fa-map-marker-alt',
       title: 'Visit Us',
-      details: ['123 Tech Street', 'Innovation City, SV 94000'],
+      details: ['Shahu Lane - 2, near Creative Institute.', 'Pragatinagar, Baramati.'],
       color: '#00B4D8'
     },
     {
       icon: 'fas fa-phone',
       title: 'Call Us',
-      details: ['+1 (555) 123-4567', '+1 (555) 987-6543'],
+      details: ['+91 7030330387'],
       color: '#0077B6'
     },
     {
       icon: 'fas fa-envelope',
       title: 'Email Us',
-      details: ['info@avtechinstitute.com', 'admissions@avtechinstitute.com'],
+      details: ['avtechbaramati@gmail.com'],
       color: '#0096C7'
     },
     {
