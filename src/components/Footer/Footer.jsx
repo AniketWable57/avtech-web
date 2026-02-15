@@ -79,17 +79,17 @@ const Footer = () => {
               <div className="contact-item">
                 <i className="fas fa-map-marker-alt contact-icon"></i>
                 <div>
-                  <p className="contact-text">123 Tech Street, Innovation City</p>
-                  <p className="contact-text">Silicon Valley, SV 94000</p>
+                  <p className="contact-text">Shahu Lane - 2, near Creative Institute.</p>
+                  <p className="contact-text">Pragatinagar, Baramati.</p>
                 </div>
               </div>
               <div className="contact-item">
                 <i className="fas fa-phone contact-icon"></i>
-                <p className="contact-text">+1 (555) 123-4567</p>
+                <p className="contact-text">+91 7030330387</p>
               </div>
               <div className="contact-item">
                 <i className="fas fa-envelope contact-icon"></i>
-                <p className="contact-text">info@avtechinstitute.com</p>
+                <p className="contact-text">avtechbaramati@gmail.com</p>
               </div>
               <div className="contact-item">
                 <i className="fas fa-clock contact-icon"></i>

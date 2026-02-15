@@ -138,32 +138,32 @@ const Home = () => {
     { 
       id: 1, 
       alt: 'Classroom',
-      image: '/Images/Gallery/classroom.jpg'
+      image: '/Images/Gallery/1.jpg'
     },
     { 
       id: 2, 
       alt: 'Lab Session',
-      image: '/Images/Gallery/lab.jpg'
+      image: '/Images/Gallery/2.jpg'
     },
     { 
       id: 3, 
       alt: 'Project Work',
-      image: '/Images/Gallery/project.jpg'
+      image: '/Images/Gallery/3.jpg'
     },
     { 
       id: 4, 
       alt: 'Industry Visit',
-      image: '/Images/Gallery/industry.jpg'
+      image: '/Images/Gallery/4.jpg'
     },
     { 
       id: 5, 
       alt: 'Workshop',
-      image: '/Images/Gallery/workshop.jpg'
+      image: '/Images/Gallery/5.jpg'
     },
     { 
       id: 6, 
       alt: 'Campus',
-      image: '/Images/Gallery/campus.jpg'
+      image: '/Images/Gallery/logo.jpg'
     }
   ];
 

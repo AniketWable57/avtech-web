@@ -282,7 +282,7 @@ const Contact = () => {
                 <p>Call our 24/7 helpline for urgent inquiries</p>
               </div>
               <div className="emergency-contact">
-                <span className="emergency-number">+1 (555) 911-4567</span>
+                <span className="emergency-number">+91 7030330387</span>
                 <button className="emergency-btn">
                   <i className="fas fa-phone-alt"></i> Call Now
                 </button>
@@ -422,101 +422,55 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-      <section 
-        className="map-section" 
-        ref={el => sectionsRef.current[4] = el}
-      >
-        <div className="container">
-          <div className="section-header">
+   <section 
+    className="map-section" 
+    ref={el => sectionsRef.current[4] = el}
+>
+    <div className="container">
+        <div className="section-header">
             <h2 className="section-title">Find Us on Google Maps</h2>
             <p className="section-subtitle">
-              Visit our campus or get directions
+                Visit our campus or get directions
             </p>
-          </div>
+        </div>
 
-          <div className="map-container">
-            <div className="map-visual" ref={mapRef}>
-              {/* Map Visualization */}
-              <div className="map-background">
-                <div className="map-grid">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="grid-line"></div>
-                  ))}
-                </div>
-                
-                {/* Map Marker */}
-                <div className="map-marker">
-                  <div className="marker-pin">
-                    <i className="fas fa-map-marker-alt"></i>
-                  </div>
-                  <div className="marker-pulse"></div>
-                </div>
+        <div className="map-container">
+            {/* >>> REPLACED: Google Maps iframe instead of visual map <<< */}
+            <div className="google-map-embed">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3590.1534187979905!2d74.58759600475116!3d18.168003937520165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc3a1b547a423a1%3A0x5644234c1cf6d804!2sAvtech%20Pvt%20Ltd.%20Baramati!5e0!3m2!1sen!2sin!4v1771147508797!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="450" 
+                    style={{ border: 0 }} 
+                    allowFullScreen={true} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Google Maps location of Avtech Pvt Ltd. Baramati"
+                ></iframe>
+            </div>
 
-                {/* Streets */}
-                <div className="street horizontal" style={{ top: '30%' }}></div>
-                <div className="street horizontal" style={{ top: '70%' }}></div>
-                <div className="street vertical" style={{ left: '40%' }}></div>
-                <div className="street vertical" style={{ left: '60%' }}></div>
-              </div>
-
-              {/* Location Card */}
-              <div className="location-card">
+            {/* You can keep the Location Card here if you like, outside the iframe */}
+            <div className="location-card" style={{ marginTop: '20px' }}> {/* Added margin for spacing */}
                 <h3 className="location-title">
-                  <i className="fas fa-university"></i> AV Tech Institute
+                    <i className="fas fa-university"></i> AV Tech Institute
                 </h3>
                 <div className="location-details">
-                  <p><i className="fas fa-map-pin"></i> 123 Tech Street, Innovation City</p>
-                  <p><i className="fas fa-phone"></i> +1 (555) 123-4567</p>
-                  <p><i className="fas fa-clock"></i> Mon-Fri: 9AM-7PM, Sat: 9AM-3PM</p>
+                    <p><i className="fas fa-map-pin"></i> Shahu Lane - 2, near Creative Institute. Pragatinagar, Baramati.</p>
+                    <p><i className="fas fa-phone"></i> +91 7030330387</p>
+                    <p><i className="fas fa-clock"></i> Mon-Fri: 9AM-7PM, Sat: 9AM-3PM</p>
                 </div>
                 <div className="location-actions">
-                  <button className="direction-btn">
-                    <i className="fas fa-directions"></i> Get Directions
-                  </button>
-                  <button className="save-btn">
-                    <i className="fas fa-bookmark"></i> Save Location
-                  </button>
+                    <button className="direction-btn">
+                        <i className="fas fa-directions"></i> Get Directions
+                    </button>
+                    <button className="save-btn">
+                        <i className="fas fa-bookmark"></i> Save Location
+                    </button>
                 </div>
-              </div>
             </div>
-
-            {/* Transportation Info */}
-            <div className="transport-info">
-              <h3>How to Reach Us</h3>
-              <div className="transport-options">
-                <div className="transport-option">
-                  <div className="transport-icon metro">
-                    <i className="fas fa-subway"></i>
-                  </div>
-                  <div className="transport-details">
-                    <h4>Metro</h4>
-                    <p>Get off at Innovation City Station (Line 2)</p>
-                  </div>
-                </div>
-                <div className="transport-option">
-                  <div className="transport-icon bus">
-                    <i className="fas fa-bus"></i>
-                  </div>
-                  <div className="transport-details">
-                    <h4>Bus</h4>
-                    <p>Routes 101, 205, 307 stop nearby</p>
-                  </div>
-                </div>
-                <div className="transport-option">
-                  <div className="transport-icon parking">
-                    <i className="fas fa-parking"></i>
-                  </div>
-                  <div className="transport-details">
-                    <h4>Parking</h4>
-                    <p>Free parking available on campus</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
-
+    </div>
+</section>
       {/* CTA Section */}
       <section className="contact-cta" ref={el => sectionsRef.current[5] = el}>
         <div className="container">

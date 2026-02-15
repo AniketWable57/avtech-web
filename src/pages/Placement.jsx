@@ -300,26 +300,7 @@ const Placement = () => {
               </div>
             ))}
           </div>
-          <div className="stats-banner">
-            <div className="stats-container">
-              <div className="stat-item">
-                <div className="stat-number" data-target="500">0</div>
-                <div className="stat-desc">Students Placed</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number" data-target="120">0</div>
-                <div className="stat-desc">Hiring Partners</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number" data-target="95">0</div>
-                <div className="stat-desc">Placement Rate</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number" data-target="85">0</div>
-                <div className="stat-desc">Average Package (LPA)</div>
-              </div>
-            </div>
-          </div>
+         
         </div>
       </section>
 

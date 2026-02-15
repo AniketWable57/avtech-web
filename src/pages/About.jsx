@@ -82,17 +82,16 @@ const About = () => {
     }
   ];
 
-  // Milestones data
-  const milestones = [
-    { year: '2018', title: 'Institute Founded', description: 'Started with 3 courses and 2 classrooms' },
-    { year: '2019', title: 'First Batch Success', description: '100% placement for inaugural batch' },
-    { year: '2020', title: 'Online Expansion', description: 'Launched online learning platform during pandemic' },
-    { year: '2021', title: 'Industry Partnerships', description: 'Tied up with 25+ tech companies' },
-    { year: '2022', title: 'New Campus', description: 'Expanded to 10,000 sq ft state-of-the-art facility' },
-    { year: '2023', title: 'International Recognition', description: 'Awarded "Best Tech Institute" by EduTech Awards' },
-    { year: '2024', title: 'Global Expansion', description: 'Started international student batches' }
-  ];
-
+// Milestones data - Company launched Nov 2025
+const milestones = [
+  { year: 'Nov 2025', title: 'Company Founded', description: 'Started operations with a vision to revolutionize tech education' },
+  { year: 'Dec 2025', title: 'First Cohort Begins', description: 'Launched with 2 flagship courses and 25 passionate students' },
+  { year: 'Jan 2026', title: 'Early Success', description: 'First student project wins local hackathon' },
+  { year: 'Feb 2026', title: 'Industry Connect', description: 'Partnered with 5 tech companies for mentorship programs' },
+  { year: 'Mar 2026', title: 'Curriculum Expansion', description: 'Added 3 new specialized courses based on market demand' },
+  { year: 'Apr 2026', title: 'Community Growth', description: 'Crossed 100 active learners milestone' },
+  { year: 'May 2026', title: 'First Placements', description: 'First batch completes training, 80% placement rate achieved' }
+];
   // Core values
   const coreValues = [
     { icon: 'fas fa-lightbulb', title: 'Innovation', description: 'Constantly updating curriculum with latest technologies' },
@@ -177,14 +176,18 @@ const About = () => {
             </div>
             <div className="intro-visual">
               <div className="logo-display">
-                <div className="logo-animation">
-                  <div className="logo-circle">
-                    <span className="logo-text">AV</span>
-                  </div>
-                  <div className="ring ring-1"></div>
-                  <div className="ring ring-2"></div>
-                  <div className="ring ring-3"></div>
-                </div>
+                <div className="about-logo-animation">
+  <div className="about-logo-circle">
+    <img 
+      src="/Images/Logo/logo.jpg" 
+      alt="Company Logo"
+      className="about-logo-image"
+    />
+  </div>
+  <div className="about-ring about-ring-1"></div>
+  <div className="about-ring about-ring-2"></div>
+  <div className="about-ring about-ring-3"></div>
+</div>
                 <div className="logo-details">
                   <h3>AV Tech Institute</h3>
                   <p>Future Ready Education Since 2018</p>
