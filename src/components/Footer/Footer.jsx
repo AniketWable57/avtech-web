@@ -53,8 +53,8 @@ const Footer = () => {
               <li><Link to="/about" className="footer-link">About Us</Link></li>
               <li><Link to="/placement" className="footer-link">Placements</Link></li>
               <li><Link to="/contact" className="footer-link">Contact Us</Link></li>
-              <li><a href="#" className="footer-link">Privacy Policy</a></li>
-              <li><a href="#" className="footer-link">Terms & Conditions</a></li>
+              <li><Link to="/privacy-policy" className="footer-link">Privacy Policy</Link></li>
+              <li><Link to="/terms-conditions" className="footer-link">Terms & Conditions</Link></li>
             </ul>
           </div>
 
@@ -62,13 +62,13 @@ const Footer = () => {
           <div className="footer-section course-categories">
             <h3 className="footer-title">Courses</h3>
             <ul className="footer-links">
-              <li><a href="#" className="footer-link">Full Stack Python</a></li>
-              <li><a href="#" className="footer-link">Java Development</a></li>
-              <li><a href="#" className="footer-link">C / C++ Programming</a></li>
-              <li><a href="#" className="footer-link">Mech CAD</a></li>
-              <li><a href="#" className="footer-link">SAP Modules</a></li>
-              <li><a href="#" className="footer-link">Civil Arch CAD</a></li>
-              <li><a href="#" className="footer-link">Data Science</a></li>
+              <li><Link to="/courses/full-stack-python" className="footer-link">Full Stack Python</Link></li>
+              <li><Link to="/courses/java-development" className="footer-link">Java Development</Link></li>
+              <li><Link to="/courses/c-cpp-programming" className="footer-link">C / C++ Programming</Link></li>
+              <li><Link to="/courses/mech-cad" className="footer-link">Mech CAD</Link></li>
+              <li><Link to="/courses/sap-modules" className="footer-link">SAP Modules</Link></li>
+              <li><Link to="/courses/civil-arch-cad" className="footer-link">Civil Arch CAD</Link></li>
+              <li><Link to="/courses/data-science" className="footer-link">Data Science</Link></li>
             </ul>
           </div>
 
@@ -110,11 +110,11 @@ const Footer = () => {
               &copy; {currentYear} AV Tech Institute. All Rights Reserved.
             </p>
             <div className="footer-bottom-links">
-              <a href="#" className="bottom-link">Privacy Policy</a>
+              <Link to="/privacy-policy" className="bottom-link">Privacy Policy</Link>
               <span className="separator">|</span>
-              <a href="#" className="bottom-link">Terms of Service</a>
+              <Link to="/terms-of-service" className="bottom-link">Terms of Service</Link>
               <span className="separator">|</span>
-              <a href="#" className="bottom-link">Sitemap</a>
+              <Link to="/sitemap" className="bottom-link">Sitemap</Link>
             </div>
           </div>
         </div>
