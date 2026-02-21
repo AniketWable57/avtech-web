@@ -115,7 +115,7 @@ const milestones = [
                 <span className="title-line highlight">AV Tech Institute</span>
               </h1>
               <p className="hero-subtitle">
-                Empowering Future Technologists Since 2018
+                Empowering Future Technologists Since 2025
               </p>
               <div className="hero-stats">
                 {/* <div className="stat">
@@ -127,7 +127,7 @@ const milestones = [
                   <span className="stat-label">Students</span>
                 </div> */}
                 <div className="stat">
-                  <span className="stat-number">200+</span>
+                  <span className="stat-number">15+</span>
                   <span className="stat-label">Companies</span>
                 </div>
               </div>
@@ -143,7 +143,7 @@ const milestones = [
       >
         <div className="container">
           <div className="intro-grid">
-            <div className="intro-content">
+            <div className="intro-content"> 
               <div className="section-header">
                 <h2 className="section-title">About AV Tech</h2>
                 <p className="section-subtitle">
@@ -152,7 +152,7 @@ const milestones = [
               </div>
               <div className="intro-text">
                 <p>
-                  AV Tech Institute is a premier technical education hub founded in 2018 
+                  AV Tech Institute is a premier technical education hub founded in 2025 
                   with a vision to bridge the gap between academia and industry. 
                   We specialize in providing cutting-edge technical courses with 
                   hands-on project experience.
@@ -190,7 +190,7 @@ const milestones = [
 </div>
                 <div className="logo-details">
                   <h3>AV Tech Institute</h3>
-                  <p>Future Ready Education Since 2018</p>
+                  <p>Future Ready Education Since 2025</p>
                 </div>
               </div>
             </div>
@@ -366,7 +366,7 @@ const milestones = [
         <div className="container">
           <div className="cta-content">
             <h2>Ready to Start Your Tech Journey?</h2>
-            <p>Join 5000+ successful students who transformed their careers with AV Tech</p>
+            <p>Join 20+ successful students who transformed their careers with AV Tech</p>
             <div className="cta-buttons">
               <button className="btn-primary">
                 <i className="fas fa-calendar-alt"></i> Book Campus Tour

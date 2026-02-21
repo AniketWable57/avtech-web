@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Home.css';
 
 const Home = () => {
   // References for scroll animations
   const sectionsRef = useRef([]);
+  
+  // State for gallery modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [modalImage, setModalImage] = useState({ src: '', alt: '' });
 
   useEffect(() => {
     // Initialize Intersection Observer for scroll animations
@@ -26,12 +31,99 @@ const Home = () => {
       if (section) observer.observe(section);
     });
 
+    // Keyboard event listener for modal
+    const handleKeyDown = (e) => {
+      if (modalOpen) {
+        if (e.key === 'Escape') {
+          closeModal();
+        } else if (e.key === 'ArrowLeft') {
+          navigateImage('prev');
+        } else if (e.key === 'ArrowRight') {
+          navigateImage('next');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
       sectionsRef.current.forEach((section) => {
         if (section) observer.unobserve(section);
       });
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [modalOpen]);
+
+  // Gallery images
+  const galleryImages = [
+    {
+      id: 1,
+      alt: 'Classroom',
+      image: '/Images/Gallery/1.jpeg'
+    },
+    {
+      id: 2,
+      alt: 'Lab Session',
+      image: '/Images/Gallery/2.jpeg'
+    },
+    {
+      id: 3,
+      alt: 'Project Work',
+      image: '/Images/Gallery/3.jpeg'
+    },
+    {
+      id: 4,
+      alt: 'Industry Visit',
+      image: '/Images/Gallery/4.jpeg'
+    },
+    {
+      id: 5,
+      alt: 'Workshop',
+      image: '/Images/Gallery/5.jpeg'
+    },
+    {
+      id: 6,
+      alt: 'Campus',
+      image: '/Images/Gallery/logo.jpg'
+    }
+  ];
+
+  // Modal functions
+  const openModal = (index) => {
+    setCurrentImageIndex(index);
+    setModalImage({
+      src: galleryImages[index].image,
+      alt: galleryImages[index].alt
+    });
+    setModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    document.body.style.overflow = '';
+  };
+
+  const navigateImage = (direction) => {
+    let newIndex;
+    if (direction === 'prev') {
+      newIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    } else {
+      newIndex = (currentImageIndex + 1) % galleryImages.length;
+    }
+    setCurrentImageIndex(newIndex);
+    setModalImage({
+      src: galleryImages[newIndex].image,
+      alt: galleryImages[newIndex].alt
+    });
+  };
+
+  // Handle click outside modal content
+  const handleModalClick = (e) => {
+    if (e.target.classList.contains('gallery-modal')) {
+      closeModal();
+    }
+  };
 
   // Course data with actual image paths
   const courses = [
@@ -133,40 +225,6 @@ const Home = () => {
     }
   ];
 
-  // Gallery images
-  const galleryImages = [
-    { 
-      id: 1, 
-      alt: 'Classroom',
-      image: '/Images/Gallery/1.jpg'
-    },
-    { 
-      id: 2, 
-      alt: 'Lab Session',
-      image: '/Images/Gallery/2.jpg'
-    },
-    { 
-      id: 3, 
-      alt: 'Project Work',
-      image: '/Images/Gallery/3.jpg'
-    },
-    { 
-      id: 4, 
-      alt: 'Industry Visit',
-      image: '/Images/Gallery/4.jpg'
-    },
-    { 
-      id: 5, 
-      alt: 'Workshop',
-      image: '/Images/Gallery/5.jpg'
-    },
-    { 
-      id: 6, 
-      alt: 'Campus',
-      image: '/Images/Gallery/logo.jpg'
-    }
-  ];
-
   // Fallback colors if images don't load
   const fallbackColors = {
     'python.png': '#3776AB',
@@ -192,11 +250,38 @@ const Home = () => {
     `;
   };
 
+  // Handle gallery navigation
+  const scrollGallery = (direction) => {
+    const track = document.querySelector('.gallery-track');
+    if (track) {
+      const scrollAmount = 320; // Width of one item + gap
+      const currentScroll = track.style.transform ? 
+        parseInt(track.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
+      
+      let newScroll;
+      if (direction === 'next') {
+        newScroll = Math.min(currentScroll - scrollAmount, -(track.scrollWidth - track.clientWidth));
+      } else {
+        newScroll = Math.min(currentScroll + scrollAmount, 0);
+      }
+      
+      track.style.transform = `translateX(${newScroll}px)`;
+      track.style.animation = 'none';
+      
+      // Reset auto-scroll after 3 seconds of inactivity
+      clearTimeout(window.scrollTimeout);
+      window.scrollTimeout = setTimeout(() => {
+        track.style.animation = 'scrollGallery 40s linear infinite';
+        track.style.transform = '';
+      }, 3000);
+    }
+  };
+
   return (
     <div className="home">
       {/* Section 1: Hero */}
-      <section 
-        className="hero-section" 
+      <section
+        className="hero-section"
         ref={el => sectionsRef.current[0] = el}
       >
         <div className="hero-container">
@@ -234,8 +319,8 @@ const Home = () => {
       </section>
 
       {/* Section 2: Courses We Provide */}
-      <section 
-        className="courses-section" 
+      <section
+        className="courses-section"
         ref={el => sectionsRef.current[1] = el}
       >
         <div className="container">
@@ -249,14 +334,14 @@ const Home = () => {
             {courses.map((course, index) => {
               const imageName = course.image.split('/').pop();
               return (
-                <div 
-                  className="course-card" 
+                <div
+                  className="course-card"
                   key={course.id}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="course-image-container">
-                    <img 
-                      src={course.image} 
+                    <img
+                      src={course.image}
                       alt={course.title}
                       className="course-image"
                       onError={(e) => handleImageError(e, imageName)}
@@ -309,8 +394,8 @@ const Home = () => {
       </section>
 
       {/* Section 3: Why AV Tech? */}
-      <section 
-        className="why-section" 
+      <section
+        className="why-section"
         ref={el => sectionsRef.current[2] = el}
       >
         <div className="container">
@@ -322,8 +407,8 @@ const Home = () => {
           </div>
           <div className="features-grid">
             {features.map((feature, index) => (
-              <div 
-                className="feature-card" 
+              <div
+                className="feature-card"
                 key={index}
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
@@ -339,8 +424,8 @@ const Home = () => {
             <div className="why-text">
               <h3>Transform Your Career</h3>
               <p>
-                At AV Tech Institute, we bridge the gap between academic learning 
-                and industry requirements. Our courses are constantly updated to 
+                At AV Tech Institute, we bridge the gap between academic learning
+                and industry requirements. Our courses are constantly updated to
                 match the latest technological trends and industry demands.
               </p>
               <ul className="why-list">
@@ -350,28 +435,27 @@ const Home = () => {
                 <li><i className="fas fa-check-circle"></i> Placement assistance</li>
               </ul>
             </div>
-           <div className="why-visual">
-  <div className="visual-element">
-    <div className="circle-ring"></div>
-    <div className="inner-circle">
-      <div className="logo-background">
-        <img 
-          src="/Images/Logo/logo.jpg" 
-          alt="AV Tech Institute Logo" 
-          className="centered-logo"
-        />
-       
-      </div>
-    </div>
-  </div>
-</div>
+            <div className="why-visual">
+              <div className="visual-element">
+                <div className="circle-ring"></div>
+                <div className="inner-circle">
+                  <div className="logo-background">
+                    <img
+                      src="/Images/Logo/logo.jpg"
+                      alt="AV Tech Institute Logo"
+                      className="centered-logo"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Section 4: Our Vision and Motivation */}
-      <section 
-        className="vision-section" 
+      <section
+        className="vision-section"
         ref={el => sectionsRef.current[3] = el}
       >
         <div className="container">
@@ -379,22 +463,22 @@ const Home = () => {
             <div className="vision-text">
               <h2 className="section-title">Our Vision & Motivation</h2>
               <p className="vision-statement">
-                To create a world where quality technical education is accessible 
-                to everyone, empowering individuals to build successful careers 
+                To create a world where quality technical education is accessible
+                to everyone, empowering individuals to build successful careers
                 in technology and contribute to digital transformation.
               </p>
               <div className="stats-container">
                 <div className="stat-item">
-                  <div className="stat-number">2018</div>
-                  <div className="stat-label">Founded</div>
+                  <div className="stat-number">2025</div>
+                  <div className="stat-label-home">Founded</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">25+</div>
-                  <div className="stat-label">Industry Partners</div>
+                  <div className="stat-number">15+</div>
+                  <div className="stat-label-home">Industry Partners</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">1000+</div>
-                  <div className="stat-label">Projects Delivered</div>
+                  <div className="stat-number">10+</div>
+                  <div className="stat-label-home ">Projects Delivered</div>
                 </div>
               </div>
               <div className="progress-bars">
@@ -453,8 +537,8 @@ const Home = () => {
       </section>
 
       {/* Section 5: Gallery */}
-      <section 
-        className="gallery-section" 
+      <section
+        className="gallery-section"
         ref={el => sectionsRef.current[4] = el}
       >
         <div className="container">
@@ -467,30 +551,35 @@ const Home = () => {
           <div className="gallery-container">
             <div className="gallery-track">
               {galleryImages.map((image, index) => (
-                <div 
-                  className="gallery-item" 
+                <div
+                  className="gallery-item"
                   key={image.id}
                   style={{ animationDelay: `${index * 0.1}s` }}
+                  onClick={() => openModal(index)}
                 >
                   <div className="gallery-image">
-                    <img 
+                    <img
                       src={image.image}
                       alt={image.alt}
                       className="gallery-img"
                       loading="lazy"
                       onError={(e) => {
                         e.target.style.display = 'none';
-                        e.target.parentElement.innerHTML = `
-                          <div class="image-placeholder">
-                            <i className="fas fa-image"></i>
-                            <span>${image.alt}</span>
-                          </div>
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'image-placeholder';
+                        placeholder.innerHTML = `
+                          <i class="fas fa-image"></i>
+                          <span>${image.alt}</span>
                         `;
+                        e.target.parentElement.appendChild(placeholder);
                       }}
                     />
                   </div>
                   <div className="gallery-overlay">
-                    <button className="view-btn">
+                    <button className="view-btn" onClick={(e) => {
+                      e.stopPropagation();
+                      openModal(index);
+                    }}>
                       <i className="fas fa-expand"></i>
                     </button>
                   </div>
@@ -499,15 +588,59 @@ const Home = () => {
             </div>
           </div>
           <div className="gallery-nav">
-            <button className="nav-btn prev-btn">
+            <button className="nav-btn prev-btn" onClick={() => scrollGallery('prev')}>
               <i className="fas fa-chevron-left"></i>
             </button>
-            <button className="nav-btn next-btn">
+            <button className="nav-btn next-btn" onClick={() => scrollGallery('next')}>
               <i className="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
       </section>
+
+      {/* Gallery Modal */}
+      {modalOpen && (
+        <div className="gallery-modal active" onClick={handleModalClick}>
+          <div className="modal-content">
+            <button className="modal-close" onClick={closeModal} aria-label="Close modal">
+              <i className="fas fa-times"></i>
+            </button>
+            <button 
+              className="modal-nav prev" 
+              onClick={() => navigateImage('prev')}
+              aria-label="Previous image"
+            >
+              <i className="fas fa-chevron-left"></i>
+            </button>
+            <button 
+              className="modal-nav next" 
+              onClick={() => navigateImage('next')}
+              aria-label="Next image"
+            >
+              <i className="fas fa-chevron-right"></i>
+            </button>
+            <div className="modal-image-container">
+              <img 
+                className="modal-image" 
+                src={modalImage.src} 
+                alt={modalImage.alt}
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = `
+                    <div class="image-placeholder modal-placeholder">
+                      <i class="fas fa-image"></i>
+                      <span>${modalImage.alt}</span>
+                    </div>
+                  `;
+                }}
+              />
+            </div>
+            <div className="modal-caption">
+              {modalImage.alt} - Image {currentImageIndex + 1} of {galleryImages.length}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
